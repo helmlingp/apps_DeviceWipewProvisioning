@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+	Copyright © 2018 VMware, Inc. All rights reserved.
+	REM This product is protected by copyright and intellectual property laws in the United States and 
+	REM other countries as well as by international treaties.
+	REM VMware products may be covered by one or more patents listed at http://www.vmware.com/go/patents 
+-->
+<Reset>
+  <Run Phase="BasicReset_BeforeImageApply">
+    <Path>VMwareRefreshBackup.cmd</Path>
+    <Duration>2</Duration>
+  </Run>
+  <Run Phase="BasicReset_AfterImageApply">
+    <Path>VMwareRefreshRecover.cmd</Path>
+    <Duration>2</Duration>
+  </Run>
+  <Run Phase="FactoryReset_AfterImageApply">
+    <Path>VMwareResetRecover.cmd</Path>
+    <Duration>2</Duration>
+  </Run>
+</Reset>
