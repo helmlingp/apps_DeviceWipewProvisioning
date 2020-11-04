@@ -51,22 +51,23 @@ echo STARTED at %time%  >>%LOGFILE%
 		rem call :SUB_RESTORE_HIVE %TOPREGKEYNAME%\AirWatchMDM "%TARGETOSDRIVE%\%VMWAREPATH%\Registry\%AWMDMAGENT%.hive"
 	
 	echo Add Custom Registry Changes for OOBE >>%LOGFILE%
-	rem reg add “HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE” /v “PrivacyConsentStatus” /t REG_DWORD /d 1 /f
+	rem reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v "PrivacyConsentStatus" /t REG_DWORD /d 1 /f
 
 	rem reg unload %TOPREGKEYNAME%
 	echo Done restoring HIVEs >>%LOGFILE%
 
-	REM Copy unattend.xml to c:\Recovery\AutoApply overwring previous
+	REM Copy AWResetUnattend.xml to c:\Windows\Panther\unattend.xml
 	echo : >>%LOGFILE%
-	echo Copy unattend.xml to Recovery\OEM folder >>%LOGFILE%
+	echo Copy AWResetUnattend.xml to Recovery\OEM folder >>%LOGFILE%
 	if exist "%TARGETOSDRIVE%\%OEMPATH%\AWResetUnattend.xml" (
 		REM SET %TargetOSDrive% in the unattend.xml
 		echo Copying %TARGETOSDRIVE%\%OEMPATH%\AWResetUnattend.xml to %TARGETOS%\Panther\unattend.xml >>%LOGFILE%
 		copy "%TARGETOSDRIVE%\%OEMPATH%\AWResetUnattend.xml" "%TARGETOS%\Panther\Unattend.xml" /y
+		
+		rem Can be extend Device Wipe to run unattend.xml customisations by placing in AutoApply directory
 		rem copy %TARGETOSDRIVE%\%OEMPATH%\AWResetUnattend.xml %TARGETOSDRIVE%\%AUTOAPPLY%\unattend.xml /Y
 
 		if exist "%TARGETOS%\Panther\Unattend.xml" (
-		rem if exist "%TARGETOSDRIVE%\%AUTOAPPLY%\unattend.xml" (
 			echo %TARGETOS%\Panther\Unattend.xml succesfully created >>%LOGFILE%
 			goto SUCCESS
 		)		
