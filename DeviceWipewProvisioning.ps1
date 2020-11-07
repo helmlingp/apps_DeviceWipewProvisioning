@@ -37,8 +37,24 @@ if(!$unattend){
   #Fail
   Write-Host "Cannot find unattend.xml"
 } else {
-  $OEMPATHExists = Get-Item -Path $OEMPATH
-  if($OEMPATHExists){
+  if (-not (Test-Path -LiteralPath $OEMPATH)) {
+    
+    try {
+        New-Item -Path $OEMPATH -ItemType Directory -ErrorAction Stop | Out-Null #-Force
+    }
+    catch {
+        Write-Error -Message "Unable to create directory '$OEMPATH'. Error was: $_" -ErrorAction Stop
+    }
+    "Successfully created directory '$OEMPATH'."
+  } else {
+    Write-Host "Copying files"
+    Copy-Item -Path $unattend -Destination "$OEMPATH\AWResetUnattend.xml" -Force
+    Copy-Item -Path "$current_path\ResetConfig.xml" -Destination $OEMPATH -Force
+    Copy-Item -Path "$current_path\VMwareResetRecover.cmd" -Destination $OEMPATH -Force
+  }
+}
+#  $OEMPATHExists = Get-Item -Path $OEMPATH
+<#   if($OEMPATHExists){
     Write-Host "Copying files"
     Copy-Item -Path $unattend -Destination "$OEMPATH\AWResetUnattend.xml" -Force
     Copy-Item -Path "$current_path\ResetConfig.xml" -Destination $OEMPATH -Force
@@ -47,4 +63,4 @@ if(!$unattend){
     #fail
     Write-Host "Cannot find C:\Recovery\OEM folder, no Press Button Reset available on this machine."
   }
-}
+} #>
