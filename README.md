@@ -1,10 +1,10 @@
 # apps_DeviceWipewProvisioning
-1. Copies files needed to use Workspace ONE Factory Provisioning PPKG and unattend.xml during Device Reset with Provisioning Data.
-    a.    Files copied to C:\Recovery\OEM folder to configure Windows on Device Reset and OOBE.
-    b.    Also copies PPKG to C:\Recovery\Customization if exists in this package. Assists with 'brownfield' Windows 10 device to provide over-the-air rebuild to a 'known good state'
-        i.    This option can be used in conjunction with Agent Only Enrolment flow, eg. AirLift SCCM Migration & Enrolment
-        11.   This option will overwrite the existing PPKG.
-2. Calls Push Button Reset (Device Wipe with Provisioning Data) if -Reset flag provided
+Copies files needed to use Workspace ONE Factory Provisioning PPKG and unattend.xml during Device Reset with Provisioning Data.
+a.    Files copied to C:\Recovery\OEM folder to configure Windows on Device Reset and OOBE.
+b.    Also copies PPKG to C:\Recovery\Customization if exists in this package. Assists with 'brownfield' Windows 10 device to provide over-the-air rebuild to a 'known good state'
+   i.    This option can be used in conjunction with Agent Only Enrolment flow, eg. AirLift SCCM Migration & Enrolment
+   ii.   This option will overwrite the existing PPKG.
+Calls Push Button Reset (Device Wipe with Provisioning Data) if -Reset flag provided
 
 REQUIREMENTS:
 1. WS1 Intelligent Hub (AirwatchAgent.msi) installed and Device enrolled. Requires other components already copied to C:\Recovery\OEM folder.
