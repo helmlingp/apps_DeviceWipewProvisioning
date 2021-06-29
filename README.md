@@ -18,3 +18,8 @@ OPTIONAL Brownfield Devices:
     NOTE: Include only one PPKG file in the package folder. PPKG can be called anything, eg. myprovisioningpackage.ppkg.
 2. -Reset script switch parameter will initiate a Device Wipe with Provisioning Data call to the MDM CSP RemoteWipe
     https://deviceadvice.io/2019/04/26/powershell-run-mdm-csps-locally/
+
+WS1 Application parameters:
+    Install command: powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1
+    Uninstall command: powershell.exe Remove-Item -Path "C:\Recovery\OEM\VMwareResetRecover.cmd" -Force -Recurse
+    Install Complete: file exists - C:\Recovery\OEM\VMwareResetRecover.cmd
