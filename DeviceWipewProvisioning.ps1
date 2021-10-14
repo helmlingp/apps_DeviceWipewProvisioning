@@ -8,43 +8,40 @@
 	  Filename:       DeviceWipeWProvisioning.ps1
     Updated:        September, 2021
 	.DESCRIPTION
-    1. Copies Workspace ONE Factory Provisioning PPKG and unattend.xml files to Recovery folder to get same experience during Device Reset with Provisioning Data
-        a.    AirwatchAgent.msi copied to C:\Recovery\OEM folder if exists in this package. 
-        b.    unattend.xml copied to C:\Recovery\AutoApply folder. 
-        b.    PPKG copied to C:\Recovery\Customization folder if exists in this package. 
-              Assists with 'brownfield' Windows 10 device to provide over-the-air rebuild to a 'known good state'
-              i.    This option can be used in conjunction with Agent Only Enrolment flow, eg. AirLift SCCM Migration & Enrolment
-              ii.   This option will overwrite the existing PPKG.
-    
-    Brownfield Devices:
+    Copies Workspace ONE Factory Provisioning PPKG and unattend.xml files to Recovery folder to get the same OOBE and Domain Join experience during 
+    Device Reset with Provisioning Data as a brand new Factory Provisioned/DropShip Provisioned device. Completes the following tasks:
+    a.  AirwatchAgent.msi copied to C:\Recovery\OEM folder if exists in this package. 
+    b.  unattend.xml copied to C:\Recovery\AutoApply folder.
+        NOTE: Include only one unattend XML file in the package folder. Unattend.xml can be called anything, eg myunatten.xml, and long filenames are supported.
+    c.  PPKG copied to C:\Recovery\Customization folder if exists in this package. 
+        Assists with 'brownfield' Windows 10 device to provide over-the-air rebuild to a 'known good state'
+        i.    This option can be used in conjunction with Agent Only Enrolment flow, eg. AirLift SCCM Migration & Enrolment
+        ii.   This option will overwrite the existing PPKG.
+        NOTE: Include only one PPKG file in the package folder. PPKG can be called anything, eg. ce05a86f-0599-4559-b2f4-35104226ea53.ppkg.
+
+    Brownfield Devices
     This script can be used to push the Workspace ONE Factory Provisioning files to a device even if it wasn't provisioned with Workspace ONE Factory Provisioning.
     This is helpful where you want to take advantage of the ability to reprovision/rebuild a device over-the-air.
     Workspace ONE Factory Provisioning Package file (PPKG)
-      NOTE: Include only one PPKG file in the package folder. PPKG can be called anything, eg. ce05a86f-0599-4559-b2f4-35104226ea53.ppkg.
 
-    WS1 Application parameters:
-      Install command: powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1
-      Uninstall command: powershell.exe Remove-Item -Path "C:\Recovery\OEM\VMwareResetRecover.cmd" -Force -Recurse
-      Install Complete: file exists - C:\Recovery\OEM\VMwareResetRecover.cmd
-
-    Install Command: powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1
-    Uninstall Command: .
+    WS1 Application parameters
+    Install command: powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1
+    Uninstall command: powershell.exe Remove-Item -Path "C:\Recovery\AutoApply\unattend.xml" -Force -Recurse
     Installer Success Exit Code: 0
     When to Call Install Complete: File Exists C:\Recovery\AutoApply\unattend.xml
 
   .REQUIREMENTS
     1. Device enrolled into a Workspace ONE environment. Does not need to be the target environment.
-    2. WS1 Intelligent Hub (AirwatchAgent.msi) added to ZIP. 
-        In a browser, goto https://<DS_FQDN>/agents/ProtectionAgent_AutoSeed/AirwatchAgent.msi to download it, 
+    2. Workspace ONE Factory Provisioning unattend.xml. 
+        NOTE: Include only one XML file in the package folder. Unattend.xml can be called anything, eg myunatten.xml, and long filenames are supported.
+    3. WS1 Intelligent Hub (AirwatchAgent.msi). To obtain the correct version to match your console, in a browser goto https://<DS_FQDN>/agents/ProtectionAgent_AutoSeed/AirwatchAgent.msi to download it, 
         substituting <DS_FQDN> with the FQDN for their Device Services Server. Why do this, because the version from https://getwsone.com is the latest shipping version, 
         not the one seeded into the console that is deployed to new devices or upgraded to on existing devices after the console is upgraded.
-    2. WinRE partition on the device with Windows RE boot image (Winre.wim) available on System drive
+    4. WinRE partition on the device with Windows RE boot image (Winre.wim) available on System drive
         https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/pbr-faq
-    3. Workspace ONE Factory Provisioning unattend.xml. 
-        NOTE: Include only one XML file in the package folder. Unattend.xml can be called anything, eg myunatten.xml, and long filenames are supported.
-    
+        
   .EXAMPLE
-    Deploy relevant components to a WS1 Windows 10 machine ready for Device Wipe with Provisioning Data call
+    Deploy relevant components to a WS1 Windows 10+ machine ready for Device Wipe with Provisioning Data call from WS1 Console
     powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1
 #>
 
