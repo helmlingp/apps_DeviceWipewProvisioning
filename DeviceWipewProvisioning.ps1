@@ -8,12 +8,16 @@
 	  Filename:       DeviceWipeWProvisioning.ps1
     Updated:        September, 2021
 	.DESCRIPTION
-    Copies Workspace ONE Factory Provisioning PPKG and unattend.xml files to Recovery folder to get the same OOBE and Domain Join experience during 
-    Device Reset with Provisioning Data as a brand new Factory Provisioned/DropShip Provisioned device. Completes the following tasks:
-    a.  AirwatchAgent.msi copied to C:\Recovery\OEM folder if exists in this package. 
-    b.  unattend.xml copied to C:\Recovery\AutoApply folder.
+    1. Copies unattend.xml and optionally Workspace ONE Factory Provisioning PPKG and AirwatchAgent.msi files to Recovery folder to get the same OOBE and Domain Join experience during 
+    Device Reset with Provisioning Data, as a brand new Factory Provisioned/DropShip Provisioned device. 
+    2. Can be used to update existing devices with new versions of the PPKG and AirwatchAgent.msi
+    3. Can be used to copy unattend.xml, PPKG and AirwatchAgent.msi to devices not deployed with Workspace ONE Factory Provisioning
+
+    Completes the following tasks:
+    a.  unattend.xml copied to C:\Recovery\AutoApply folder.
         NOTE: Include only one unattend XML file in the package folder. Unattend.xml can be called anything, eg myunatten.xml, and long filenames are supported.
-    c.  PPKG copied to C:\Recovery\Customization folder if exists in this package. 
+    b.  (OPTIONAL) AirwatchAgent.msi copied to C:\Recovery\OEM folder if exists in this package. 
+    c.  (OPTIONAL) PPKG copied to C:\Recovery\Customization folder if exists in this package. 
         Assists with 'brownfield' Windows 10 device to provide over-the-air rebuild to a 'known good state'
         i.    This option can be used in conjunction with Agent Only Enrolment flow, eg. AirLift SCCM Migration & Enrolment
         ii.   This option will overwrite the existing PPKG.
@@ -22,7 +26,6 @@
     Brownfield Devices
     This script can be used to push the Workspace ONE Factory Provisioning files to a device even if it wasn't provisioned with Workspace ONE Factory Provisioning.
     This is helpful where you want to take advantage of the ability to reprovision/rebuild a device over-the-air.
-    Workspace ONE Factory Provisioning Package file (PPKG)
 
     WS1 Application parameters
     Install command: powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1
@@ -39,7 +42,6 @@
         not the one seeded into the console that is deployed to new devices or upgraded to on existing devices after the console is upgraded.
     4. WinRE partition on the device with Windows RE boot image (Winre.wim) available on System drive
         https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/pbr-faq
-        
   .EXAMPLE
     Deploy relevant components to a WS1 Windows 10+ machine ready for Device Wipe with Provisioning Data call from WS1 Console
     powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1
@@ -85,22 +87,21 @@ $AUTOAPPLY = "C:\Recovery\AutoApply"
 $file = "unattend.xml"
 Set-TargetResource -Path $AUTOAPPLY -File $file -FiletoCopy $unattend
 
-#Copy AirwatchAgent.msi
+#Copy AirwatchAgent.msi if found
 #Need to find a way to leverage the latest version already installed on the device. Doesn't appear to be copied to 
 #C:\Recovery\OEM and %programdata%\VMware when upgraded. AirwatchAgent.msi stored in C:\Recovery\OEM and %programdata%\VMware are the original versions.
 $airwatchagent = Get-ChildItem -Path $current_path -Include *AirwatchAgent.msi* -Recurse -ErrorAction SilentlyContinue
 $OEMPATH = "C:\Recovery\OEM"
 $file = "AirwatchAgent.msi"
-Set-TargetResource -Path $OEMPATH -File $file -FiletoCopy $airwatchagent
+if($airwatchagent){Set-TargetResource -Path $OEMPATH -File $file -FiletoCopy $airwatchagent}
 
-#Copy PPKG
+#Copy PPKG if found
 $PPKG = Get-ChildItem -Path $current_path -Include *.ppkg* -Recurse -ErrorAction SilentlyContinue
 $CustomPATH = "C:\Recovery\Customizations"
 $file = $PPKG.Name
 #Remove existing PPKG
 write-host "Removing existing PPKG"
-Remove-Item -Path $CustomPATH -Include *.ppkg* -Recurse -ErrorAction SilentlyContinue
-Set-TargetResource -Path $CustomPATH -File $file -FiletoCopy $PPKG
+if($PPKG){Remove-Item -Path $CustomPATH -Include *.ppkg* -Recurse -ErrorAction SilentlyContinue;Set-TargetResource -Path $CustomPATH -File $file -FiletoCopy $PPKG}
 
 #If Reset, Unattend & PPKG files all exist, then continue
 If (!$FileExists){$exitcode = 1;exit $exitcode}
