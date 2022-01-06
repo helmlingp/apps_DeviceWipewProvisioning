@@ -93,7 +93,9 @@ Set-TargetResource -Path $AUTOAPPLY -File $file -FiletoCopy $unattend
 $airwatchagent = Get-ChildItem -Path $current_path -Include *AirwatchAgent.msi* -Recurse -ErrorAction SilentlyContinue
 $OEMPATH = "C:\Recovery\OEM"
 $file = "AirwatchAgent.msi"
-if($airwatchagent){Set-TargetResource -Path $OEMPATH -File $file -FiletoCopy $airwatchagent}
+if($airwatchagent){
+  Set-TargetResource -Path $OEMPATH -File $file -FiletoCopy $airwatchagent
+}
 
 #Copy PPKG if found
 $PPKG = Get-ChildItem -Path $current_path -Include *.ppkg* -Recurse -ErrorAction SilentlyContinue
@@ -101,7 +103,10 @@ $CustomPATH = "C:\Recovery\Customizations"
 $file = $PPKG.Name
 #Remove existing PPKG
 write-host "Removing existing PPKG"
-if($PPKG){Remove-Item -Path $CustomPATH -Include *.ppkg* -Recurse -ErrorAction SilentlyContinue;Set-TargetResource -Path $CustomPATH -File $file -FiletoCopy $PPKG}
+if($PPKG){
+  Remove-Item -Path $CustomPATH -Include *.ppkg* -Recurse -ErrorAction SilentlyContinue;
+  Set-TargetResource -Path $CustomPATH -File $file -FiletoCopy $PPKG
+}
 
 #If Reset, Unattend & PPKG files all exist, then continue
 If (!$FileExists){$exitcode = 1;exit $exitcode}
