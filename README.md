@@ -1,14 +1,14 @@
 # apps_DeviceWipewProvisioning
 Copies Workspace ONE Factory Provisioning PPKG and unattend.xml files to Recovery folder to get the same OOBE and Domain Join experience during 
 Device Reset with Provisioning Data as a brand new Factory Provisioned/DropShip Provisioned device. Completes the following tasks:
-a.    unattend.xml copied to C:\Recovery\AutoApply folder. 
-      **NOTE:** Include only one unattend XML file in the package folder. Unattend.xml can be called anything, eg myunatten.xml, and long filenames are supported.
-b.    (OPTIONAL) AirwatchAgent.msi copied to C:\Recovery\OEM folder if exists in this package. 
-c.    (OPTIONAL) PPKG copied to C:\Recovery\Customization folder if exists in this package. 
-      Assists with 'brownfield' Windows 10 device to provide over-the-air rebuild to a 'known good state'
-      i.    This option can be used in conjunction with Agent Only Enrolment flow, eg. AirLift SCCM Migration & Enrolment
-      ii.   This option will overwrite the existing PPKG.
-      **NOTE:** Include only one PPKG file in the package folder. PPKG can be called anything, eg. ce05a86f-0599-4559-b2f4-35104226ea53.ppkg.
+a. unattend.xml copied to C:\Recovery\AutoApply folder. 
+**NOTE:** Include only one unattend XML file in the package folder. Unattend.xml can be called anything, eg myunatten.xml, and long filenames are supported.
+b. (OPTIONAL) AirwatchAgent.msi copied to C:\Recovery\OEM folder if exists in this package. 
+c. (OPTIONAL) PPKG copied to C:\Recovery\Customization folder if exists in this package. 
+   Assists with 'brownfield' Windows 10 device to provide over-the-air rebuild to a 'known good state'
+   i.    This option can be used in conjunction with Agent Only Enrolment flow, eg. AirLift SCCM Migration & Enrolment
+   ii.   This option will overwrite the existing PPKG.
+   **NOTE:** Include only one PPKG file in the package folder. PPKG can be called anything, eg. ce05a86f-0599-4559-b2f4-35104226ea53.ppkg.
 
 **REQUIREMENTS**
 1. Device enrolled into a Workspace ONE environment. Does not need to be the target environment.
