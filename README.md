@@ -9,6 +9,12 @@ Device Reset with Provisioning Data as a brand new Factory Provisioned/DropShip 
    3.2 This option will overwrite the existing PPKG.
    **NOTE:** Include only one PPKG file in the package folder. PPKG can be called anything, eg. ce05a86f-0599-4559-b2f4-35104226ea53.ppkg.
 
+**WS1 Application parameters**
+Install command:                 powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1
+Uninstall command:               powershell.exe Remove-Item -Path "C:\Recovery\AutoApply\unattend.xml" -Force -Recurse
+Installer Success Exit Code:     0
+When to Call Install Complete:   File Exists C:\Recovery\AutoApply\unattend.xml
+    
 **REQUIREMENTS**
 1. Device enrolled into a Workspace ONE environment. Does not need to be the target environment.
 2. Workspace ONE Factory Provisioning unattend.xml. 
