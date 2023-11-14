@@ -3,14 +3,14 @@
 **Factory Resetting or Rebuilding** a Windows device over the air is possible by extending the [Windows Push Button Reset](https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/how-push-button-reset-features-work?view=windows-11) capability built into Windows in conjunction with the 'Device Wipe with Provisioning Data' feature in Workspace ONE. By default, factory resetting or rebuilding devices is possible using Device Wipe, however the device will reset with factory default settings, with no OOBE customisations, domain join or automated enrolment. 
 
 With a simple extension (the 'secret sauce') to the existing DropShip Provisioning capabilities within Workspace ONE, we can provide the exact same user experience to users when performing a Device Wipe with Provisioning Data, or initiating a device side PC Reset (Push Button Reset). The extension can be used to push a Workspace ONE DropShip Provisioning files to a device (even if it wasn't provisioned with Workspace ONE DropShip Provisioning). This is helpful where you want to take advantage of the ability to repurpose, re-provision, or rebuild a device over-the-air to a 'known good state'.
-![Benefits of DWPD](/apps_DeviceWipewProvisioning/images/Screenshot%202023-05-09%20at%209.31.42%20am.png)
+![Benefits of DWPD](/images/Screenshot%202023-05-09%20at%209.31.42%20am.png)
 There are multiple use cases for Device Wipe.
-![Use Cases](/apps_DeviceWipewProvisioning/images/Screenshot%202023-05-09%20at%209.30.01%20am.png)
+![Use Cases](/images/Screenshot%202023-05-09%20at%209.30.01%20am.png)
 Compare the different DropShip Provisioning with Device Wipe scenarios.
-![Compare DWPD](/apps_DeviceWipewProvisioning/images/Screen%20Shot%202022-08-23%20at%208.05.46%20am.png)
+![Compare DWPD](/images/Screen%20Shot%202022-08-23%20at%208.05.46%20am.png)
 
 And this solution will leverage the same DropShip Offline package and unattend.xml that allows you to direct ship devices to users fully configured.
-![DPOffline Benefits](/apps_DeviceWipewProvisioning/images/Screenshot%202023-05-09%20at%209.23.23%20am.png)
+![DPOffline Benefits](/images/Screenshot%202023-05-09%20at%209.23.23%20am.png)
 **Note:** This can can be used in conjunction with User / Agent Enrolment flow, command line staging, and Azure AD MDM app flows. Additionally, this process can be utilised to migrate devices from one environment to another by deploying the target environment settings within the unattend.xml.
 
 This script completes the following tasks to prepare the device for Device Wipe with Provisioning Data function:
