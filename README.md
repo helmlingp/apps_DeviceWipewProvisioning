@@ -59,7 +59,7 @@ The above-mentioned script provides a simple mechanism to create an application 
 
 ![ZIP package folder](/images/image-2023-5-9_9-47-10.png)
 
-**Note: Use 7-Zip if the PPKG file is greater than 4GB in size!**
+> Note: Use 7-Zip if the PPKG file is greater than 4GB in size!
 
 ## Upload the ZIP and create a Workspace ONE UEM Application
 1. In the Workspace ONE UEM Console, select Resources > Apps > Native > Internal > Add > Add Application File
@@ -68,8 +68,8 @@ The above-mentioned script provides a simple mechanism to create an application 
 
 Attribute   | Parameter
 ---   |  ---:
-Install command   |  powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1
-Uninstall command |  powershell.exe Remove-Item -Path "C:\Recovery\AutoApply\unattend.xml" -Force -Recurse
+Install command:   |  `powershell.exe -ep bypass -file .\DeviceWipeWProvisioning.ps1`
+Uninstall command: |  `powershell.exe Remove-Item -Path "C:\Recovery\AutoApply\unattend.xml" -Force -Recurse`
 Installer Success Exit Code:  |  0
 When to Call Install Complete:   |  File Exists C:\Recovery\AutoApply\unattend.xml
 
@@ -117,5 +117,5 @@ If the device won't boot into Windows or allow user authentication, for example 
 
 ![PC Reset Bitlocker](/images/image-2023-5-9_12-3-30.png)
 
-As described above, Push Button Reset is utilised by the 'Device Wipe' to initiate a reset and reinstall of the OS, with the option to keep or delete user data and applications.
+> As described above, Push Button Reset is utilised by the 'Device Wipe' to initiate a reset and reinstall of the OS, with the option to keep or delete user data and applications.
 
