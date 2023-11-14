@@ -41,23 +41,23 @@ The above-mentioned script provides a simple mechanism to create an application 
 2. Provide a Provisioning Package Name and Description
 3. Select Drop Ship Provisioning - Offline
 
-![DPOffline](/apps_DeviceWipewProvisioning/images/image-2023-5-9_9-46-42.png)
+![DPOffline](/images/image-2023-5-9_9-46-42.png)
 
 4. Select appropriate domain join configuration and Windows build settings. This configuration is saved into the unattend.xml
 
-![unattend screen](/apps_DeviceWipewProvisioning/images/image-2023-5-9_9-46-51.png)
+![unattend screen](/images/image-2023-5-9_9-46-51.png)
 
 5. Select the applications to include in the Provisioning Package (PPKG) and auto-deploy to the device
 
-![select apps](/apps_DeviceWipewProvisioning/images/image-2023-5-9_9-46-57.png)
+![select apps](/images/image-2023-5-9_9-46-57.png)
 
 6. Download the PPKG and unattend.xml into empty folder. Add the DeviceWipewProvisioning.ps1 script and the AirwatchAgent.msi
 
-![package folder](/apps_DeviceWipewProvisioning/images/image-2023-5-9_9-47-4.png)
+![package folder](/images/image-2023-5-9_9-47-4.png)
 
 7. ZIP all four files into a ZIP file.
 
-![ZIP package folder](/apps_DeviceWipewProvisioning/images/image-2023-5-9_9-47-10.png)
+![ZIP package folder](/images/image-2023-5-9_9-47-10.png)
 
 **Note: Use 7-Zip if the PPKG file is greater than 4GB in size!**
 
@@ -81,19 +81,19 @@ There are three methods to initiating a reset, 2 are user initiated and 1 admin 
 This method is suitable if the device is operating and manageable.
 1. View the details of the machine > More Actions > Device Wipe
 
-![Device Wipe](/apps_DeviceWipewProvisioning/images/Screen%20Shot%202021-10-15%20at%201.53.17%20pm.png)
+![Device Wipe](/images/Screen%20Shot%202021-10-15%20at%201.53.17%20pm.png)
 
 2. Select Device Wipe with Provisioning Data from the "Please select the wipe action you wish to take" dropdown > Continue > enter your console admin pin code > Continue
 
-![DWSelection](/apps_DeviceWipewProvisioning/images/image2022-8-23_8-6-45.png)
+![DWSelection](/images/image2022-8-23_8-6-45.png)
 
-![DWDP](/apps_DeviceWipewProvisioning/images/Screen%20Shot%202021-10-15%20at%201.53.46%20pm.png)
+![DWDP](/images/Screen%20Shot%202021-10-15%20at%201.53.46%20pm.png)
 
 This will send a doWipePersistProvisionedData CSP command to the device. The Device should begin the reset process almost instantly. If not, there maybe WNS connectivity issues.
 
 3. Monitor the device wipe status
 
-![Monitor](/apps_DeviceWipewProvisioning/images/Screen%20Shot%202021-10-15%20at%201.55.22%20pm.png)
+![Monitor](/images/Screen%20Shot%202021-10-15%20at%201.55.22%20pm.png)
 
 The device should reset and reboot to the OOBE screen and follow the same OOBE flow as Factory Provisioned devices.
 
@@ -102,7 +102,7 @@ If a device is not manageable, for example the Workspace ONE Intelligent Hub has
 1. Open System Settings
 2. Select Recovery > 'Reset this PC' and follow the prompts to reset with local image
 
-![Reset this PC](/apps_DeviceWipewProvisioning/images/Screenshot%202023-05-09%20at%2011.53.30%20am.png)
+![Reset this PC](/images/Screenshot%202023-05-09%20at%2011.53.30%20am.png)
 
 ### 3. Unmanageable and non-working Device (User Initiated)
 If the device won't boot into Windows or allow user authentication, for example where an Enterprise Wipe is performed on an Azure AD joined device and there is no local Administrator account enabled, the user or admin can boot into the Windows Recovery Console and initiate the Reset My PC process directly from the local device.
@@ -111,11 +111,11 @@ If the device won't boot into Windows or allow user authentication, for example 
 2. The device will restart in the Windows Recovery Environment (WinRE) environment.
 3. On the Choose an option screen, select Troubleshoot > Reset this PC > Remove everything.
 
-![Choose an Option](/apps_DeviceWipewProvisioning/images/image-2023-5-9_12-2-46.png) ![Troubleshoot](/apps_DeviceWipewProvisioning/images/image-2023-5-9_12-3-12.png) ![Reset this PC](/apps_DeviceWipewProvisioning/images/image-2023-5-9_12-3-21.png)
+![Choose an Option](/images/image-2023-5-9_12-2-46.png) ![Troubleshoot](/images/image-2023-5-9_12-3-12.png) ![Reset this PC](/images/image-2023-5-9_12-3-21.png)
 
 4. If the device was Bitlocker encrypted with TPM, the recovery key will be required
 
-![PC Reset Bitlocker](/apps_DeviceWipewProvisioning/images/image-2023-5-9_12-3-30.png)
+![PC Reset Bitlocker](/images/image-2023-5-9_12-3-30.png)
 
 As described above, Push Button Reset is utilised by the 'Device Wipe' to initiate a reset and reinstall of the OS, with the option to keep or delete user data and applications.
 
