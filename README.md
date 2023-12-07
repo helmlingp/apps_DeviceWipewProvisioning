@@ -13,7 +13,7 @@ And this solution will leverage the same DropShip Offline package and unattend.x
 ![DPOffline Benefits](/images/Screenshot%202023-05-09%20at%209.23.23%20am.png)
 **Note:** This can can be used in conjunction with User / Agent Enrolment flow, command line staging, and Azure AD MDM app flows. Additionally, this process can be utilised to migrate devices from one environment to another by deploying the target environment settings within the unattend.xml.
 
-This script completes the following tasks to prepare the device for Device Wipe with Provisioning Data function:
+Deployed as an application from Workspace ONE UEM, this script completes the following tasks to prepare the device for Device Wipe with Provisioning Data function:
 1. Copies unattend.xml to C:\Recovery\AutoApply folder. 
 **NOTE:** Include only one unattend XML file in the package folder. Unattend.xml can be called anything, eg myunatten.xml, and long filenames are supported. However note that if testing manually, the file in C:\Recovery\AutoApply folder must be called unattend.xml.
 2. (OPTIONAL) Copies AirwatchAgent.msi to C:\Recovery\OEM folder if exists in this package. Device Wipe with Provisioning Data will use the existing AirwatchAgent.msi file if the device has already been enrolled. Include this file within this package if requiring a specific version.
